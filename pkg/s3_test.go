@@ -1,4 +1,4 @@
-package client
+package s3
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 )
 
 func TestSave(t *testing.T) {
-	err := godotenv.Load("../.env")
+	err := godotenv.Load("../.env.s3")
 	if err != nil {
 		t.Errorf("load dotenv error: %v", err)
 	}
