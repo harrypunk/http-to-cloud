@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestSave(t *testing.T) {
+func TestS3Save(t *testing.T) {
 	err := godotenv.Load("../.env.s3")
 	if err != nil {
 		t.Errorf("load dotenv error: %v", err)
@@ -26,5 +26,23 @@ func TestSave(t *testing.T) {
 	err = saveClient.Save(ctx, buck, key, fileUrl)
 	if err != nil {
 		t.Errorf("client error: %v", err)
+	}
+}
+
+func TestOssClient_Save(t *testing.T) {
+	err := godotenv.Load("../.env.oss")
+	if err != nil {
+		t.Errorf("load dotenv error: %v", err)
+	}
+	fileUrl := os.Getenv("SRC_FILE_URL")
+	buck := os.Getenv("DEST_OSS_BUCKET")
+	key := os.Getenv("DEST_OSS_KEY")
+	region := os.Getenv("OSS_REGION")
+
+	cl := feature.OssClient{Region: region}
+
+	err = cl.Save(context.Background(), buck, key, fileUrl)
+	if err != nil {
+		t.Errorf("failed to save oss: %v", err)
 	}
 }
