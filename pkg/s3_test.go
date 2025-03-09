@@ -1,7 +1,8 @@
-package feature
+package feature_test
 
 import (
 	"context"
+	"github.com/harrypunk/http-to-cloud/pkg"
 	"github.com/joho/godotenv"
 	"os"
 	"testing"
@@ -17,7 +18,7 @@ func TestSave(t *testing.T) {
 	endpoint := os.Getenv("DEST_S3_ENDPOINT")
 	buck := os.Getenv("DEST_S3_BUCKET")
 	key := os.Getenv("DEST_S3_key")
-	saveClient := Client{
+	saveClient := feature.S3Client{
 		Endpoint: endpoint,
 	}
 
