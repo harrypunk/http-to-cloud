@@ -11,11 +11,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-type Client struct {
+type S3Client struct {
 	Endpoint string
 }
 
-func (cl *Client) Save(ctx context.Context, bucketName, objectKey, fileURL string) error {
+func (cl *S3Client) Save(ctx context.Context, bucketName, objectKey, fileURL string) error {
 	var cfg aws.Config
 	var err error
 
