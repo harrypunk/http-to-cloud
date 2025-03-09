@@ -1,4 +1,4 @@
-module github.com/harrypunk/save-to-s3
+module github.com/harrypunk/http-to-cloud
 
 go 1.23.6
 
