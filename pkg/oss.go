@@ -28,7 +28,7 @@ func (cl *OssClient) Save(ctx context.Context, bucketName, objectKey, fileURL st
 	client := oss.NewClient(cfg)
 	uploader := client.NewUploader()
 
-	result, err := uploader.UploadFrom(context.TODO(),
+	result, err := uploader.UploadFrom(ctx,
 		&oss.PutObjectRequest{
 			Bucket: oss.Ptr(bucketName),
 			Key:    oss.Ptr(objectKey)},
