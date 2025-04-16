@@ -75,3 +75,21 @@ func TestHttpBufGet(t *testing.T) {
 		t.Logf("received chunk: %v", len(chunk))
 	}
 }
+
+func TestMultiPartCos(t *testing.T) {
+	err := godotenv.Load("../.env.cos.put")
+	if err != nil {
+		t.Errorf("load dotenv error: %v", err)
+	}
+	fileUrl := os.Getenv("SRC_FILE_URL")
+	endpoint := os.Getenv("DEST_COS_ENDPOINT")
+	key := os.Getenv("DEST_COS_KEY")
+	tcId := os.Getenv("TC_ID")
+	tcKey := os.Getenv("TC_KEY")
+
+	cl := feature.CosMultiClient{Endpoint: endpoint, TCId: tcId, TCKey: tcKey, BufSize: 10}
+	err = cl.Save(context.Background(), "", key, fileUrl)
+	if err != nil {
+		t.Errorf("failed to save oss: %v", err)
+	}
+}
