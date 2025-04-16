@@ -64,3 +64,14 @@ func TestCosSave1(t *testing.T) {
 		t.Errorf("failed to save oss: %v", err)
 	}
 }
+
+func TestHttpBufGet(t *testing.T) {
+	url := "http://localhost:4000/test1.zip"
+	hb := feature.HttpBuf{Size: 10}
+	ch := make(chan []byte)
+
+	go hb.Get(context.Background(), url, ch)
+	for chunk := range ch {
+		t.Logf("received chunk: %v", len(chunk))
+	}
+}
