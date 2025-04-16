@@ -60,6 +60,9 @@ func (cl *CosMultiClient) Save(ctx context.Context, bucketName, objectKey, fileU
 	for range totalParts {
 		rs := <-resultCh
 		log.Printf("part result: %v", rs)
+		if rs.Err != nil {
+			return rs.Err
+		}
 	}
 
 	resp, _, err := client.Object.CompleteMultipartUpload(ctx, objectKey, uploadId, &cos.CompleteMultipartUploadOptions{})
